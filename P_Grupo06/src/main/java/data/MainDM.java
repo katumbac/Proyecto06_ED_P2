@@ -16,5 +16,12 @@ public class MainDM {
     public static void main(String args[]){
         DataManager dm = new DataManager(App.pathArchivo);
         System.out.println(dm.attributes);
+        System.out.println(dm.recordMatrix);
+        int n1 = 1;
+        int n = (int)Math.pow(5, n1);
+        System.out.println(n);
+        n1++;
+        n = (int)Math.pow(5, n1);
+        System.out.println(n);
     }
 }
