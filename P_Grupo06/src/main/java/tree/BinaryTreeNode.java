@@ -4,6 +4,9 @@
  */
 package tree;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  * @author alexx
@@ -12,6 +15,8 @@ public class BinaryTreeNode {
     // Por cada nivel se encuentra una pregunta
     private int nivel;
     private String pregunta;
+    // respuestasPerNode sera para que se gyarde las solucioes que corresponde a cada pregunta despues de su filtrado
+    private Map<String, List<String>> respuestasPerNode;
     private BinaryTree left;
     private BinaryTree right;
 
@@ -42,6 +47,14 @@ public class BinaryTreeNode {
 
     public void setNivel(int nivel) {
         this.nivel = nivel;
+    }
+
+    public Map<String, List<String>> getRespuestasPerNode() {
+        return respuestasPerNode;
+    }
+
+    public void setRespuestasPerNode(Map<String, List<String>> respuestasPerNode) {
+        this.respuestasPerNode = respuestasPerNode;
     }
 
     public BinaryTree getLeft() {

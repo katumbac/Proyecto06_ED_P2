@@ -22,9 +22,17 @@ import java.util.Set;
  */
 public class DataManager{
     public static final String SEPARADOR = ",";
-    List<String> attributes = new ArrayList<String>();
+    public static List<String> attributes = new ArrayList<String>();
     Map<String, Set<String>> possibleValues = new HashMap<String, Set<String>>();
     List<List<String>> recordMatrix = new ArrayList<List<String>>();
+    
+    /*
+    Agregado 04082022
+    Probando metiendolos en un diccionario. 
+    La clave es el animal y como Value estan las caracateristicas que se pone como 1 o 0
+    */
+    public static Map<String, List<String>> individualsAnimal = new HashMap<String, List<String>>();
+    /////////////////////////////////
     
     // Parametro 
     public DataManager(String path){
@@ -32,7 +40,9 @@ public class DataManager{
         try {
             sc = new Scanner(new File(path));
             loadAttributes(sc.nextLine());
-            loadData(sc);
+            loadAnimalCharacteristics(sc);
+            //loadData(sc);
+            
 	} catch (FileNotFoundException e) {
             e.printStackTrace();
 	}
@@ -41,6 +51,8 @@ public class DataManager{
     // Cargar la primera linea del archivo que contiene los nombres de los aributos
     private void loadAttributes(String line) {
         String[] atts = line.split(SEPARADOR);
+        String animal = atts[0];
+        System.out.println(animal);
 
         for (String s : atts) {
             attributes.add(s);
@@ -57,6 +69,7 @@ public class DataManager{
 			// Read the line and split it by the separator (def: ',');
 			String line = sc.nextLine();
 			String[] instanceValues = line.split(SEPARADOR);
+                        
 
 			// Generate the new record
 			// We assume the data for each attribute comes correctly ordered
@@ -75,4 +88,21 @@ public class DataManager{
 			recordMatrix.add(record);
 		}
 	}
+        
+        private void loadAnimalCharacteristics(Scanner sc){
+            while (sc.hasNext()) {
+			// Read the line and split it by the separator (def: ',');
+			String line = sc.nextLine();
+			String[] instanceValues = line.split(SEPARADOR);
+                        String animal = instanceValues[0];
+
+			List<String> characteristics = new ArrayList<String>();
+			for (int i = 1; i < instanceValues.length; i++) {
+				characteristics.add(instanceValues[i]);
+
+			}
+
+			individualsAnimal.put(animal, characteristics);
+		}
+        }
 }

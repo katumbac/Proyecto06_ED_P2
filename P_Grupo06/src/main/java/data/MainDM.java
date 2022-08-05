@@ -5,6 +5,8 @@
 package data;
 
 import com.mycompany.p_grupo06.App;
+import tree.BinaryTree;
+
 
 /**
  *
@@ -15,13 +17,28 @@ public class MainDM {
     
     public static void main(String args[]){
         DataManager dm = new DataManager(App.pathArchivo);
+        /*
+        linea agregada 04082022. Como tenemos a las clses repartidad entre paquetes, entonces llamamos unas instancia de la
+        c;ase BinaryTree para que haga los metodos que vamos a llamar
+        */
+        BinaryTree bt = new BinaryTree();
+        /////////////////////////
+        System.out.println("\nCarga de los atributos");
         System.out.println(dm.attributes);
+        System.out.println("\nRepresentacion como matriz");
         System.out.println(dm.recordMatrix);
-        int n1 = 1;
-        int n = (int)Math.pow(5, n1);
-        System.out.println(n);
-        n1++;
-        n = (int)Math.pow(5, n1);
-        System.out.println(n);
+        
+        //Linea testeo
+        System.out.println("\nAnimales individuales");
+        System.out.println(dm.individualsAnimal);
+        /////////////////////////
+        
+        //Agregado 04082022
+        bt.putQuestionNodes();
+        
+        
+        
+        
+        
     }
 }
