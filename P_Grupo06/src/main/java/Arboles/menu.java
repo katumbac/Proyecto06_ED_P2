@@ -4,7 +4,13 @@
  */
 package Arboles;
 
-import Arboles.BinaryTree;
+
+import com.mycompany.p_grupo06.App;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -20,7 +26,7 @@ public class menu {
     public static void main(String[] args) {
         
       
-        BinaryTree<String> prueba=new BinaryTree();
+        /*BinaryTree<String> prueba=new BinaryTree();
         prueba.setRootContent("pregunta1");
         prueba.setLeft(new BinaryTree<String>("pregunta2"));
         prueba.setRight(new BinaryTree<String>("pregunta2"));
@@ -28,7 +34,8 @@ public class menu {
         prueba.getLeft().setRight(new BinaryTree<String>("perro"));
         prueba.getRight().setLeft(new BinaryTree<String>("perro2"));
         //prueba.getRight().setRight(new BinaryTree<String>("oso2"));
-        menu(prueba,prueba.countLevelsRecursive()-1);//por las respuestas no son preguntas
+        menu(prueba,prueba.countLevelsRecursive()-1);//por las respuestas no son preguntas*/
+        putQuestionNodes();
        
     }
     public static void Display(BinaryTree<String> bt, int N){
@@ -114,4 +121,92 @@ public class menu {
             }
         }
     }
+    
+    //Agregado 06082022
+    //public static BinaryTree putQuestionNodes(){
+    public static void putQuestionNodes(){
+        //Cantidad de preguntas
+        int n = 0;
+        int contadorNodo = 0;
+        
+        int nivel = 0;
+        int contador = 0;
+        BufferedReader br = null;
+        
+        //Constructor vacio
+        BinaryTree<String> bt = new BinaryTree<>();
+        Queue<BinaryTree<String>> queue = new LinkedList<>();
+        try{
+            
+            br = new BufferedReader(new FileReader(App.pathFileQuestions));
+            
+            String line = br.readLine();
+
+            
+            // Adjuncion de la pregunta enel primer nodo que es la raiz
+            bt.setRootContent(line);
+            
+            queue.offer(bt);
+            //se suma ya que se agrego la primera pregunta
+            n++;
+            nivel++;
+            
+            System.out.println(line);
+            while(line != null){
+
+                int nodosHojas = (int) Math.pow(2, n);
+                
+                while(contadorNodo < nodosHojas){
+
+                    BinaryTree temp = queue.poll();
+                    if(temp.getLeft() == null){
+                        temp.setLeft(new BinaryTree(line));
+                        queue.offer(temp.getLeft());
+                        //linea testeo
+                        //System.out.println("hola");
+                        //System.out.println("Pregunta: " + temp.getLeft().getRootPregunta() + "Nivel: " + temp.getLeft().getRootNivel());
+                        ////////////////////////
+                        contadorNodo++;
+                        //System.out.println("Contador nodo: " + contadorNodo);
+                    }
+                    if(temp.getRight() == null){
+                        temp.setRight(new BinaryTree(line));
+                        queue.offer(temp.getRight());
+                        //linea testeo
+                        //System.out.println("Pregunta: " + temp.getRight().getRootPregunta() + "Nivel: " + temp.getLeft().getRootNivel());
+                        ///////////////////////////
+                        contadorNodo++;
+                        //System.out.println("Contador nodo: " + contadorNodo);
+                    }
+                    
+                    //System.out.println();
+                         
+                }
+                contadorNodo = 0;
+                n++;
+                nivel++;
+                
+ 
+                line = br.readLine();
+                
+            }
+            
+        //aqui llamar al metodo para poner las soluciones filtradas por cada nivel  
+        //respuestaPorNivel(bt);
+
+        }catch(IOException e){   
+            System.out.println("Archivo no encontrado");
+        }finally {
+            try {
+                if(br != null) {
+                    br.close();
+                }
+            }catch(IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        menu(bt,bt.countLevelsRecursive()-1);//por las respuestas no son preguntas
+    }
+    ////////////////////////////////////////////
+
 }
