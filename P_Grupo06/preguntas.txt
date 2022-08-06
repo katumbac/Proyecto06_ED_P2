@@ -2,4 +2,3 @@
 ¿El animal tiene plumas?
 ¿El animal pone huevos?
 ¿El animal da leche?
-¿El animal se transporta por aire?

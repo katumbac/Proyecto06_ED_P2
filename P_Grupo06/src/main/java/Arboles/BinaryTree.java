@@ -42,11 +42,11 @@ public class BinaryTree<E> {
         return false;
     }
 
-    public void setLeft(BinaryTree tree) {
+    public void setLeft(BinaryTree<E> tree) {
         this.root.setLeft(tree);
     }
 
-    public void setRight(BinaryTree tree) {
+    public void setRight(BinaryTree<E> tree) {
         this.root.setRight(tree);
     }
 

@@ -113,6 +113,14 @@ public class BinaryTree {
             nivel++;*/
             while(line != null){
 
+                
+                if(bt.getRoot() == null){
+                        bt = new BinaryTree(line);
+                        queue.offer(bt);
+                        n++;
+                        nivel++;
+                }
+                
                 int nodosHojas = (int) Math.pow(2, n);
                 
                 while(contadorNodo < nodosHojas){
@@ -126,7 +134,7 @@ public class BinaryTree {
                         queue.offer(bt);
                         n++;
                         nivel++;
-                    }
+                    }*/
                 
                     BinaryTree temp = queue.poll();
                     if(temp.getLeft() == null){
