@@ -6,24 +6,15 @@ package tree;
 
 import com.mycompany.p_grupo06.App;
 import data.DataManager;
-import static data.DataManager.SEPARADOR;
-import static data.DataManager.attributes;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import static java.util.Map.entry;
 import java.util.Queue;
-import java.util.Scanner;
-import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -243,8 +234,6 @@ public class BinaryTree {
     private static void respuestaPorNivel(BinaryTree bt){
         //mapa donde estan como clave los animales y como valor su respuestas a caracterisiticas en preguntas
         Map<String, List<String>> animalsChar = DataManager.individualsAnimal;
-        //Mapa donde se guaradralos animales respuesta
-        Map<String, List<String>> answersAnimals = new HashMap<String, List<String>>();
         //Queue para ir guradando los nodos por cada nivel y coger de ellos sus hijos
         Queue<BinaryTree> queue = new LinkedList<>();
 
@@ -252,9 +241,7 @@ public class BinaryTree {
         bt.getRoot().setRespuestasPerNode(animalsChar);
         queue.offer(bt);
         
-        int contadorNodo= 0;
         int n = 1;
-        int nodosHojas = (int) Math.pow(2, n);
         
         while( (!queue.isEmpty()) ){
             
