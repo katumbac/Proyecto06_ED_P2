@@ -52,7 +52,7 @@ public class DataManager{
     private void loadAttributes(String line) {
         String[] atts = line.split(SEPARADOR);
         String animal = atts[0];
-        System.out.println(animal);
+
 
         for (String s : atts) {
             attributes.add(s);

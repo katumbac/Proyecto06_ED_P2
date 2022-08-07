@@ -28,31 +28,21 @@ public class menu {
      */
     public static void main(String[] args) {
         
-      
-        /*BinaryTree<String> prueba=new BinaryTree();
-        prueba.setRootContent("pregunta1");
-        prueba.setLeft(new BinaryTree<String>("pregunta2"));
-        prueba.setRight(new BinaryTree<String>("pregunta2"));
-        prueba.getLeft().setLeft(new BinaryTree<String>("oso"));
-        prueba.getLeft().setRight(new BinaryTree<String>("perro"));
-        prueba.getRight().setLeft(new BinaryTree<String>("perro2"));
-        //prueba.getRight().setRight(new BinaryTree<String>("oso2"));
-        menu(prueba,prueba.countLevelsRecursive()-1);//por las respuestas no son preguntas*/
-        
         //Carga del archivo de los animales con sus caracteristicas
         DataManager dm = new DataManager(App.pathArchivo);
         putQuestionNodes();
        
     }
     public static void Display(BinaryTree<String> bt, int N){
+        System.out.println("Ingrese si o no");
         Stack<BinaryTree<String>> pila= new Stack<>();
         System.out.println(bt.getRootContent());
         Scanner sc=new Scanner(System.in);
-        String answer1=sc.nextLine();
-        if(answer1.equalsIgnoreCase("y")){
+        String answer1=sc.nextLine().toLowerCase();
+        if(answer1.equalsIgnoreCase("si")){
             pila.push(bt.getLeft());
         }
-        if(answer1.equalsIgnoreCase("n")){
+        if(answer1.equalsIgnoreCase("no")){
             pila.push(bt.getRight());
         }
         if(N==1){
@@ -72,10 +62,10 @@ public class menu {
                 System.out.println("hojas");
                 arbol.showLeaf();
                 
-            }else if (answer.equalsIgnoreCase("Y") && arbol.getLeft()!=null){
+            }else if (answer.equalsIgnoreCase("SI") && arbol.getLeft()!=null){
                 pila.push(arbol.getLeft());
             
-            }else if(answer.equalsIgnoreCase("N") && arbol.getRight()!=null){
+            }else if(answer.equalsIgnoreCase("NO") && arbol.getRight()!=null){
                 pila.push(arbol.getRight());
             }else{
                 System.out.println("no es posible Determinar");
@@ -96,10 +86,12 @@ public class menu {
         int N;
         int options;
         boolean flag=true;
-        System.out.println("Akinator");
+        System.out.println(" JUEGO -- > ¿En qué animal estás pensando? <--");
         System.out.println("Piensa en un animal");
-        System.out.print(">>>>>>>preguntas a responder,pero recuerda que puedes hacer maximo ->"+i+" preguntas"+"<<<<<<<\n>");
+        System.out.println(">>>>>>>Preguntas a responder <<<<<<<"
+                + "\nRecuerda que puedes hacer maximo de ->"+i+" preguntas");
         
+        System.out.print("Ingrese en cuántas preguntas quisiera que sea adivinado su animal: \n>");
         Scanner input= new Scanner(System.in);
         N= input.nextInt();
         while(N>i){
@@ -121,9 +113,7 @@ public class menu {
                     System.exit(0);
                 default:
                     System.out.println("Opcion Invalida\n3");
-                
-         
-            
+
             }
         }
     }
@@ -139,46 +129,31 @@ public class menu {
         int contador = 0;
         BufferedReader br = null;
         
-        
-        
         //Linea de prueba agregado 06082022
-        
-        /////////////////////////////////////
         
         Queue<BinaryTree<String>> queue = new LinkedList<>();
         
         //Constructor vacio
-        //BinaryTree<String> bt = new BinaryTree<>();
         BinaryTree<String> bt = new BinaryTree<>();
         try{
             
-            br = new BufferedReader(new FileReader(App.pathFileQuestions));
-            
+            br = new BufferedReader(new FileReader(App.pathFileQuestions));        
             String line = br.readLine();
-            System.out.println("Linea fuera del while: " + line);
+            
+            //System.out.println("Linea fuera del while: " + line);
             
             if(bt == null){
-            System.out.println("No tiene nada");
+            //System.out.println("No tiene nada");
             }
             
-            
-            // Adjuncion de la pregunta enel primer nodo que es la raiz
-            /*bt.setRootContent(line);
-            
-            queue.offer(bt);
-            //se suma ya que se agrego la primera pregunta
-            n++;
-            nivel++;*/
-            
-            
             while(line != null){
-                System.out.println("Linea dentro del while: " + line);
+                //System.out.println("Linea dentro del while: " + line);
                 
                 if(n == 0){
                     bt.setRootContent(line);
                     queue.offer(bt);
                     n++;
-                    System.out.println("Dentro de la condicional n ==0: " + bt.getRootContent());
+                    //System.out.println("Dentro de la condicional n ==0: " + bt.getRootContent());
                     line = br.readLine();
                     continue;
                 }
@@ -187,58 +162,29 @@ public class menu {
                 
                 
                 while(contadorNodo < nodosHojas){
-                    
-                    /*if(nivel == 0){
-                        bt = new BinaryTree<>(line);
-                        queue.offer(bt);
-                        
-                        nivel++;
-                        
-                    }*/
-                    
-                    /*if(n == 0){
-                        bt.setRootContent(line);
-                        //bt = new BinaryTree(line);
-                        queue.offer(bt);
-                        //se suma ya que se agrego la primera pregunta
-                        n++;
-                    }*/
-                    
+
                     BinaryTree temp = queue.poll();
                     if(temp.getLeft() == null){
                         temp.setLeft(new BinaryTree(line));
                         queue.offer(temp.getLeft());
-                        //linea testeo
-                        //System.out.println("hola");
-                        //System.out.println("Pregunta: " + temp.getLeft().getRootPregunta() + "Nivel: " + temp.getLeft().getRootNivel());
-                        ////////////////////////
                         contadorNodo++;
-                        //System.out.println("Contador nodo: " + contadorNodo);
+
                     }
                     if(temp.getRight() == null){
                         temp.setRight(new BinaryTree(line));
                         queue.offer(temp.getRight());
-                        //linea testeo
-                        //System.out.println("Pregunta: " + temp.getRight().getRootPregunta() + "Nivel: " + temp.getLeft().getRootNivel());
-                        ///////////////////////////
                         contadorNodo++;
-                        //System.out.println("Contador nodo: " + contadorNodo);
+
                     }
-                    
-                    //System.out.println();
-                         
+                                           
                 }
                 contadorNodo = 0;
                 n++;
                 nivel++;
-                
- 
                 line = br.readLine();
                 
             }
             
-        //aqui llamar al metodo para poner las soluciones filtradas por cada nivel  
-        //respuestaPorNivel(bt);
 
         }catch(IOException e){   
             System.out.println("Archivo no encontrado");
@@ -253,18 +199,13 @@ public class menu {
         }
 
         respuestaPorNivel(bt);
-        
-        //menu(bt,bt.countLevelsRecursive()-1);//por las respuestas no son preguntas
         menu(bt,bt.countLevelsRecursive()-1);//por las respuestas no son preguntas
         
     }
     ////////////////////////////////////////////
     
-    //private static void respuestaPorNivel(BinaryTree bt){
     private static BinaryTree<String> respuestaPorNivel(BinaryTree<String> bt){    
-        
-        
-        
+  
         //mapa donde estan como clave los animales y como valor su respuestas a caracterisiticas en preguntas
         Map<String, List<String>> animalsChar = DataManager.individualsAnimal;
         
@@ -279,19 +220,19 @@ public class menu {
 
                 BinaryTree<String> temp = pila.pop();
                 
-                if(values.get(i).equalsIgnoreCase("1") && temp.getRight() != null){
+                if(values.get(i).equalsIgnoreCase("0") && temp.getRight() != null){
                     pila.push(temp.getRight());
                 }
-                if(values.get(i).equalsIgnoreCase("0") && temp.getLeft() != null){
+                if(values.get(i).equalsIgnoreCase("1") && temp.getLeft() != null){
                     pila.push(temp.getLeft());
                 }
-                if(values.get(i).equalsIgnoreCase("1") && (temp.getRight() == null)){
+                if(values.get(i).equalsIgnoreCase("0") && (temp.getRight() == null)){
 
                     temp.setRight(new BinaryTree<>(entry.getKey()));
 
                     pila.push(bt);
                 }
-                if(values.get(i).equalsIgnoreCase("0") && (temp.getLeft() == null)){
+                if(values.get(i).equalsIgnoreCase("1") && (temp.getLeft() == null)){
                     
 
                     temp.setLeft(new BinaryTree<>(entry.getKey()));  
@@ -301,12 +242,9 @@ public class menu {
                 
             }
         }
-        
+
         return pila.peek();
-        
-        
-        
-        
+
     }
 
 }
