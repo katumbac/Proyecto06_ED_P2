@@ -73,10 +73,9 @@ public class menu {
         }
         if(pila.size()==1){
             System.out.print("Posiblemente estes pensando en un: ");
-            pila.pop().showLeaf();
-        
+            pila.pop().showLeaf();     
         }
-                
+              
     }
     
     ///menu recibe el arbol cargado y el tamano del arbol  que se obtiene con arbol.countLevelRecursive -1
