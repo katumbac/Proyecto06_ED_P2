@@ -18,8 +18,8 @@ public class App extends Application {
     //public static String pathArchivo = "zoo4.csv";
     //public static String pathFileQuestions = "preguntas.txt";
     
-    public static String pathArchivo = "pruebares.csv";
-    public static String pathFileQuestions = "pruebaP.txt";
+    public static String pathArchivo = "respuestas.csv";
+    public static String pathFileQuestions = "preguntas.txt";
 
     @Override
     public void start(Stage stage) throws IOException {

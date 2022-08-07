@@ -1,4 +1,4 @@
-¿El animal tiene pelo?
-¿El animal tiene plumas?
-¿El animal pone huevos?
-¿El animal da leche?
+¿Es carnivoro?
+¿Es insectivoro?
+¿Pone huevos?
+¿Puede nadar?
