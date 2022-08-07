@@ -21,9 +21,6 @@ import java.util.Stack;
  */
 public class menu {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
         //Carga del archivo de los animales con sus caracteristicas
@@ -127,7 +124,6 @@ public class menu {
     }
     
     //Agregado 06082022
-    //public static BinaryTree putQuestionNodes(){
     public static void putQuestionNodes(){
         //Cantidad de preguntas
         int n = 0;
@@ -148,20 +144,17 @@ public class menu {
             br = new BufferedReader(new FileReader(App.pathFileQuestions));        
             String line = br.readLine();
             
-            //System.out.println("Linea fuera del while: " + line);
             
             if(bt == null){
             //System.out.println("No tiene nada");
             }
             
             while(line != null){
-                //System.out.println("Linea dentro del while: " + line);
                 
                 if(n == 0){
                     bt.setRootContent(line);
                     queue.offer(bt);
                     n++;
-                    //System.out.println("Dentro de la condicional n ==0: " + bt.getRootContent());
                     line = br.readLine();
                     continue;
                 }
@@ -207,7 +200,6 @@ public class menu {
         menu(bt,bt.countLevelsRecursive()-1);//por las respuestas no son preguntas
         
     }
-    ////////////////////////////////////////////
     
     private static BinaryTree<String> respuestaPorNivel(BinaryTree<String> bt){    
   
@@ -238,7 +230,6 @@ public class menu {
                     pila.push(bt);
                 }
                 if(values.get(i).equalsIgnoreCase("1") && (temp.getLeft() == null)){
-                    
 
                     temp.setLeft(new BinaryTree<>(entry.getKey()));  
                     pila.push(bt);

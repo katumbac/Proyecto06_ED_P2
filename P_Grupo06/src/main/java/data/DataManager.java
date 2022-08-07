@@ -17,7 +17,6 @@ import java.util.Set;
 
 /**
  *
- * @author alexx
  * Clase la cual va a manejar los datos del archivo
  */
 public class DataManager{
@@ -57,23 +56,15 @@ public class DataManager{
         for (String s : atts) {
             attributes.add(s);
             possibleValues.put(s, new HashSet<String>());
-            // recordMatrix.add(new ArrayList<String>());
-		}
+        }
     }
     
-    /**
-	 * Loads the data that has been previously loaded in the scanner.
-	 */
+
 	private void loadData(Scanner sc) {
 		while (sc.hasNext()) {
-			// Read the line and split it by the separator (def: ',');
 			String line = sc.nextLine();
 			String[] instanceValues = line.split(SEPARADOR);
-                        
 
-			// Generate the new record
-			// We assume the data for each attribute comes correctly ordered
-			// which is a rather stupid assumption to make.
 			List<String> record = new ArrayList<String>();
 			for (int i = 0; i < instanceValues.length; i++) {
 				record.add(instanceValues[i]);
@@ -91,7 +82,7 @@ public class DataManager{
         
         private void loadAnimalCharacteristics(Scanner sc){
             while (sc.hasNext()) {
-			// Read the line and split it by the separator (def: ',');
+
 			String line = sc.nextLine();
 			String[] instanceValues = line.split(SEPARADOR);
                         String animal = instanceValues[0];

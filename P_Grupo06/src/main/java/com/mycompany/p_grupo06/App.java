@@ -15,8 +15,6 @@ public class App extends Application {
 
     private static Scene scene;
     //PONNER RUTA A5CHIVO   
-    //public static String pathArchivo = "zoo4.csv";
-    //public static String pathFileQuestions = "preguntas.txt";
     
     public static String pathArchivo = "respuestas.csv";
     public static String pathFileQuestions = "preguntas.txt";
