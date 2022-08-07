@@ -2,16 +2,12 @@ animal_name,hair,feathers,eggs,milk
 Mono,0,0,0,0
 Sardina,0,0,0,1
 Salamandra,0,0,1,0
-Ninguno,0,0,1,1
-Ninguno,0,1,0,0
-Ninguno,0,1,0,1
+Oso hormiguero,0,1,0,0
 Rana,0,1,1,0
 Rana de rio,0,1,1,1
 Leon,1,0,0,0
 Persona,1,0,0,1
 Aguila,1,0,1,0
-Pnguino,1,0,1,1
-Ninguno,1,1,0,0
-Ninguno,1,1,0,1
-Ninguno,1,1,1,0
+Pinguino,1,0,1,1
+Hormiga,1,1,0,0
 Saltamontes,1,1,1,1
