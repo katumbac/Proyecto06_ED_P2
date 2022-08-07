@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package Arboles;
 
 
@@ -10,6 +7,7 @@ import data.DataManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +81,7 @@ public class menu {
     
     ///menu recibe el arbol cargado y el tamano del arbol  que se obtiene con arbol.countLevelRecursive -1
     public static void menu(BinaryTree t,int i){
-        int N;
+        int N = 0;
         int options;
         boolean flag=true;
         System.out.println(" JUEGO -- > ¿En qué animal estás pensando? <--");
@@ -91,31 +89,42 @@ public class menu {
         System.out.println(">>>>>>>Preguntas a responder <<<<<<<"
                 + "\nRecuerda que puedes hacer maximo de ->"+i+" preguntas");
         
-        System.out.print("Ingrese en cuántas preguntas quisiera que sea adivinado su animal: \n>");
+       
+        boolean continua = false;
         Scanner input= new Scanner(System.in);
-        N= input.nextInt();
-        while(N>i){
-            System.out.print("El numero supera el maximo de preguntas, Ingrese un valor dentro del rango\n>");
-            Scanner input2= new Scanner(System.in);
-            N= input2.nextInt();
-        }
-        while(flag){
-            System.out.print("Estas Listo\n1. Start\n2. salir\n>");
-            Scanner inputOpt= new Scanner(System.in);
-            options=inputOpt.nextInt();
-        
-            switch(options){
-                case 1:
-                    Display(t,N);
-                    flag=false;
-                    break;
-                case 2:
-                    System.exit(0);
-                default:
-                    System.out.println("Opcion Invalida\n3");
+        do {
+            try {
+                System.out.print("Ingrese en cuántas preguntas quisiera que sea adivinado su animal: \n>");
+                
+                N= input.nextInt();
+                while(N>i  ){
+                    System.out.print("El numero supera el maximo de preguntas, Ingrese un valor dentro del rango\n>");
+                    //Scanner input2= new Scanner(System.in);
+                    N= input.nextInt();
+                }
+                System.out.print("Estas Listo\n1. Start\n2. salir\n>");
+                Scanner inputOpt= new Scanner(System.in);
+                options=inputOpt.nextInt();
 
+                switch(options){
+                    case 1:
+                        Display(t,N);
+
+                        flag=false;
+                        break;
+                    case 2:
+                        System.exit(0);
+                    default:
+                        System.out.println("Opcion Invalida\n3");
+
+                }
+            } catch (InputMismatchException ex) { //le informamos al usuario que debe ingresar un entero obligatoriamente.
+                System.out.println("Debe ingresar obligatoriamente un número entero.");
+                input.next();
+                continua = true;
             }
-        }
+        } while (continua);
+        
     }
     
     //Agregado 06082022
@@ -159,8 +168,7 @@ public class menu {
                 }
 
                 int nodosHojas = (int) Math.pow(2, n);
-                
-                
+                             
                 while(contadorNodo < nodosHojas){
 
                     BinaryTree temp = queue.poll();
@@ -174,7 +182,6 @@ public class menu {
                         temp.setRight(new BinaryTree(line));
                         queue.offer(temp.getRight());
                         contadorNodo++;
-
                     }
                                            
                 }
@@ -183,8 +190,7 @@ public class menu {
                 nivel++;
                 line = br.readLine();
                 
-            }
-            
+            }          
 
         }catch(IOException e){   
             System.out.println("Archivo no encontrado");
