@@ -16,8 +16,10 @@ public class App extends Application {
     private static Scene scene;
     //PONNER RUTA A5CHIVO   
     
-    public static String pathArchivo = "respuestas.csv";
-    public static String pathFileQuestions = "preguntas.txt";
+    //Agregaddo 11082022
+    public static String pathArchivoRespuestas = "Archivo respuestas.txt";
+    public static String pathFileQuestions = "Archivo preguntas.txt";
+    ///////////////////
 
     @Override
     public void start(Stage stage) throws IOException {

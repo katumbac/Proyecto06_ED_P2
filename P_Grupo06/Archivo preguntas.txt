@@ -1,0 +1,4 @@
+¿Es carnivoro?
+¿Es insectivoro?
+¿Pone huevos?
+¿Puede nadar?

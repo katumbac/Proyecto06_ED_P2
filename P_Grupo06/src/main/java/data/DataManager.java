@@ -21,6 +21,9 @@ import java.util.Set;
  */
 public class DataManager{
     public static final String SEPARADOR = ",";
+    //anadido 11082022
+    public static final String SEPARATOR = " ";
+    /////////////////
     public static List<String> attributes = new ArrayList<String>();
     Map<String, Set<String>> possibleValues = new HashMap<String, Set<String>>();
     List<List<String>> recordMatrix = new ArrayList<List<String>>();
@@ -32,6 +35,14 @@ public class DataManager{
     */
     public static Map<String, List<String>> individualsAnimal = new HashMap<String, List<String>>();
     /////////////////////////////////
+    /*
+    Agregado 11082022
+    de igual manera coo la anterior imlementacion, lo metemos en un diccionario pero usando como separador " "
+    La clave es el animal y como Value estan las caracateristicas que se pone como si o no
+    Corregir haciendolo privado
+    */
+    public static Map<String, List<String>> animalsResponses = new HashMap<String, List<String>>();
+    
     
     // Parametro 
     public DataManager(String path){
@@ -39,7 +50,8 @@ public class DataManager{
         try {
             sc = new Scanner(new File(path));
             loadAttributes(sc.nextLine());
-            loadAnimalCharacteristics(sc);
+            loadAnimalsResponses(sc);
+            //loadAnimalCharacteristics(sc);
             //loadData(sc);
             
 	} catch (FileNotFoundException e) {
@@ -80,20 +92,21 @@ public class DataManager{
 		}
 	}
         
-        private void loadAnimalCharacteristics(Scanner sc){
-            while (sc.hasNext()) {
+        //Agregado 11082022
+        private void loadAnimalsResponses(Scanner sc){
+            while(sc.hasNext()){
+                String line = sc.nextLine();
+                String[] instanceValues = line.split(SEPARATOR);
+                String animal = instanceValues[0];
+                List<String> characteristics = new ArrayList<String>();
+                
+		for (int i = 1; i < instanceValues.length; i++) {
+                    characteristics.add(instanceValues[i]);
+                }
+                
+                animalsResponses.put(animal, characteristics);
+            }
+            
 
-			String line = sc.nextLine();
-			String[] instanceValues = line.split(SEPARADOR);
-                        String animal = instanceValues[0];
-
-			List<String> characteristics = new ArrayList<String>();
-			for (int i = 1; i < instanceValues.length; i++) {
-				characteristics.add(instanceValues[i]);
-
-			}
-
-			individualsAnimal.put(animal, characteristics);
-		}
         }
 }

@@ -24,7 +24,7 @@ public class menu {
     public static void main(String[] args) {
         
         //Carga del archivo de los animales con sus caracteristicas
-        DataManager dm = new DataManager(App.pathArchivo);
+        DataManager dm = new DataManager(App.pathArchivoRespuestas);
         putQuestionNodes();
        
     }
@@ -204,7 +204,7 @@ public class menu {
     private static BinaryTree<String> respuestaPorNivel(BinaryTree<String> bt){    
   
         //mapa donde estan como clave los animales y como valor su respuestas a caracterisiticas en preguntas
-        Map<String, List<String>> animalsChar = DataManager.individualsAnimal;
+        Map<String, List<String>> animalsChar = DataManager.animalsResponses;
         
         Stack<BinaryTree<String>> pila = new Stack<>();
         
@@ -217,19 +217,21 @@ public class menu {
 
                 BinaryTree<String> temp = pila.pop();
                 
-                if(values.get(i).equalsIgnoreCase("0") && temp.getRight() != null){
+                if(values.get(i).equalsIgnoreCase("no") && temp.getRight() != null){
                     pila.push(temp.getRight());
                 }
-                if(values.get(i).equalsIgnoreCase("1") && temp.getLeft() != null){
+                if(values.get(i).equalsIgnoreCase("si") && temp.getLeft() != null){
                     pila.push(temp.getLeft());
                 }
-                if(values.get(i).equalsIgnoreCase("0") && (temp.getRight() == null)){
+                if(values.get(i).equalsIgnoreCase("no") && (temp.getRight() == null)){
 
                     temp.setRight(new BinaryTree<>(entry.getKey()));
 
                     pila.push(bt);
                 }
-                if(values.get(i).equalsIgnoreCase("1") && (temp.getLeft() == null)){
+
+                if(values.get(i).equalsIgnoreCase("si") && (temp.getLeft() == null)){
+                    
 
                     temp.setLeft(new BinaryTree<>(entry.getKey()));  
                     pila.push(bt);

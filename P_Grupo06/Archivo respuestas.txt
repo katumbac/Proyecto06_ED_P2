@@ -1,0 +1,13 @@
+animal_name,hair,feathers,eggs,milk
+Mono no no no no
+Sardina no no no si
+Salamandra no no si no
+Oso_hormiguero no si no no
+Rana no si si no
+Rana_de_rio no si si si
+Leon si no no no
+Persona si no no si
+Aguila si no si no
+Pinguino si no si si
+Hormiga si si no no
+Saltamontes si si si si
