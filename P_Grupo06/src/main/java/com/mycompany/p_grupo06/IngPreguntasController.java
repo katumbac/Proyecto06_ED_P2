@@ -4,28 +4,27 @@
  */
 package com.mycompany.p_grupo06;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 /**
  * FXML Controller class
  *
  * @author kathe
  */
-public class PrimaryController implements Initializable {
+public class IngPreguntasController implements Initializable {
+
 
     @FXML
-    private Button btnSi;
+    private TextField txtNumeroPreguntas;
     @FXML
-    private Button btnNo;
-    @FXML
-    private Button btnSalir;
-
+    private Button btnIngresar;
     /**
      * Initializes the controller class.
      */
@@ -33,18 +32,11 @@ public class PrimaryController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void btnSi(MouseEvent event) {
-    }
-
-    @FXML
-    private void btnNo(MouseEvent event) {
-    }
-
-    @FXML
-    private void Salir(MouseEvent event) {
-        Platform.exit();
-    }
     
+    @FXML
+    private void Ingresar(MouseEvent event) throws IOException {
+        App.setRoot("primaryy");
+        System.out.println("Ir a la ventana de primary");
+    }
+
 }

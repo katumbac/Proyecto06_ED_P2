@@ -4,6 +4,7 @@
  */
 package com.mycompany.p_grupo06;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -17,14 +18,10 @@ import javafx.scene.input.MouseEvent;
  *
  * @author kathe
  */
-public class PrimaryController implements Initializable {
+public class PrincipalController implements Initializable {
 
     @FXML
-    private Button btnSi;
-    @FXML
-    private Button btnNo;
-    @FXML
-    private Button btnSalir;
+    private Button btnIniciar;
 
     /**
      * Initializes the controller class.
@@ -35,11 +32,9 @@ public class PrimaryController implements Initializable {
     }    
 
     @FXML
-    private void btnSi(MouseEvent event) {
-    }
-
-    @FXML
-    private void btnNo(MouseEvent event) {
+    private void Iniciar(MouseEvent event) throws IOException {
+        App.setRoot("IngPreguntas");
+        System.out.println("Ir a la ventana de ingresar el número de preguntas");
     }
 
     @FXML
