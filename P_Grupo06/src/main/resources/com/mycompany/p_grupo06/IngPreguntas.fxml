@@ -2,23 +2,47 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.p_grupo06.IngPreguntasController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="423.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.p_grupo06.IngPreguntasController">
    <children>
-      <HBox alignment="CENTER" prefHeight="36.0" prefWidth="600.0">
+      <ImageView fitHeight="400.0" fitWidth="434.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="9.0">
+         <image>
+            <Image url="@../../../juego.png" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="155.0" pickOnBounds="false" prefHeight="45.0" prefWidth="403.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese en cúantas preguntas quieres que adivine el animal que imaginastes" wrappingWidth="411.13671875" />
+            <Text pickOnBounds="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Ingrese en cúantas preguntas quieres que adivine el animal que imaginastes" textAlignment="CENTER" wrappingWidth="299.28564453125">
+               <font>
+                  <Font name="Arial" size="17.0" />
+               </font>
+            </Text>
          </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0">
-         <children>
-            <TextField fx:id="txtNumeroPreguntas" prefHeight="25.0" prefWidth="160.0" />
-         </children>
-      </HBox>
-      <Button fx:id="btnIngresar" mnemonicParsing="false" onMouseClicked="#Ingresar" text="Ingresar" />
+      </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <TextField fx:id="txtNumeroPreguntas" layoutX="86.0" layoutY="211.0" prefHeight="25.0" prefWidth="257.0" />
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <Button fx:id="btnIngresar" layoutX="186.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#btnIngresar" text="Ingresar">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="0.5578703880310059" blue="0.11574073880910873" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnInfo" layoutX="350.0" layoutY="211.0" mnemonicParsing="false" onMouseClicked="#btnInfo" text="?" />
    </children>
-</VBox>
+</AnchorPane>

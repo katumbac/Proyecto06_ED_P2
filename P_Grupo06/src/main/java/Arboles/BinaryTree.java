@@ -16,6 +16,12 @@ public class BinaryTree<E> {
         return this.root.getContent();
     }
 
+    @Override
+    public String toString() {
+        return ""+ root + "";
+    }
+
+    
     public BinaryTree() {
         this.root = null;
     }
@@ -130,7 +136,21 @@ public class BinaryTree<E> {
         return Math.max(maxLevelLeft,maxLevelRight)+1;
     }
     
-    public void showLeaf(){
+    public String showLeaf(){
+        if(this.isLeaf()){
+            System.out.println(this.getRootContent());
+            return this.getRootContent().toString();
+        }else
+            if(this.root.getLeft() !=null){
+                this.root.getLeft().showLeaf();
+            }
+            if(this.root.getRight() !=null){
+                this.root.getRight().showLeaf();
+            }
+        return null;
+    }
+    
+    /*public void showLeaf(){
         if(this.isLeaf()){
             System.out.println(this.getRootContent());
         }else
@@ -140,5 +160,5 @@ public class BinaryTree<E> {
             if(this.root.getRight() !=null){
                 this.root.getRight().showLeaf();
             }
-    }
+    }*/
 }

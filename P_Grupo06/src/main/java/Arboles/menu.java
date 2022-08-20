@@ -20,7 +20,7 @@ import java.util.Stack;
  * @author juand
  */
 public class menu {
-
+    /*
     public static void main(String[] args) {
         
         //Carga del archivo de los animales con sus caracteristicas
@@ -243,6 +243,6 @@ public class menu {
 
         return pila.peek();
 
-    }
+    }*/
 
 }
