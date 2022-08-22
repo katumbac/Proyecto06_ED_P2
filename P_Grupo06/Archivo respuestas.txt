@@ -1,35 +1,5 @@
 animal_name,hair,feathers,eggs,milk
 Aguila si si no no no no si si si no no no no si
-Buitre si si no no no no si no si no no no no si
-Ballena si no no no si no no no no no no si no no
-Cangrejo no no no no no no no no no no no no no si
-Cabra si no si no no si no si no si si no si no
-Caballo si no si no no si no si no si si no no no
 Cerdo si no no no no si no si no si si no no no
-Cuy si no si no no si no si no si no no no no
-Cuervo si no no si no no si no si no no no no si
-Escorpion no no no si no no no no no no no no no no
-Gusano no no si no no no no no no no no no no si
-Gallina si no si si no no si no si si no no no si
-Hormiga no no no no no no no no no no no no no no
-Iguana si no si si no si no no no no si no no si
-Murcielago si si si no no no no no no no no no no no
-Avispa no no no si no no no no no no no no no no
-Leon si si no no no si no si no no si no no no
-Mapache si si si si no si no si no no si no no no
-Mantis no si si si no si no no no no no no no si
-Mono si no si no no si si si no no si no no no
-Oso_hormiguero si no no si no si no si no no si no no no
-Pinguino si si no no si no si si si no si no no si
-Perro si si no no sisi no si no si si no no no
-Puma si si no no si si no si no no si no no no
-Polilla no no no no no no no no no no no no no si
 Pulpo no no no no si no no no no no no no no si
 Rana si no no si si si no no no no no no no no
-Reno si no si no no si no si no no no no no no
-Sardina si no no no si no no no no no no si no no
-Salamandra si no no si no si no no no no si no no no
-Saltamontes no no no si no no no no no no no no no si
-Tortuga si si no no si si no no no no si no no si
-Tiburon si si no no si no no no no no no si no si
-Vaca si no si no no si no si no si si no si no
