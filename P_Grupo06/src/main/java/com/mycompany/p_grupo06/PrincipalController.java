@@ -33,9 +33,9 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void Iniciar(MouseEvent event) throws IOException {
-        //App.setRoot("IngPreguntas");
         App.setRoot("primaryy");
-        System.out.println("Ir a la ventana de ingresar el número de preguntas");
+        //System.out.println("Ir a la ventana de ingresar el número de preguntas");
+        
     }
 
     @FXML

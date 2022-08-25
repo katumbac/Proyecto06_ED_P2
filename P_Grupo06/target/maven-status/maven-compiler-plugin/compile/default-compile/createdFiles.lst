@@ -1,7 +1,6 @@
 data\DataManager.class
 Arboles\menu.class
 com\mycompany\p_grupo06\App.class
-com\mycompany\p_grupo06\IngPreguntasController.class
 com\mycompany\p_grupo06\PrincipalController.class
 com\mycompany\p_grupo06\PrimaryyController.class
 module-info.class

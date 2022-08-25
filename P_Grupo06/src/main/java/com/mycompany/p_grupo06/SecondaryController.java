@@ -2,8 +2,10 @@ package com.mycompany.p_grupo06;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class SecondaryController {
 
@@ -12,21 +14,11 @@ public class SecondaryController {
     @FXML
     private Button secondaryButton;
 
-    
-    IngPreguntasController IngPreguntascontroller_inprimary;
+
     @FXML
     private void switchToPrimary() throws IOException {
-        App.setRoot("primaryy");
-    }
-    
-    @FXML
-    public void getNumPreguntas(IngPreguntasController stage1,String text){
-        /*String textNum = txtNumeroPreguntas.getText();
-        int nu = Integer.parseInt(textNum);
-        System.out.println(nu);*/
-        lblText.setText(text);
+        //App.setRoot("primaryy");
 
-        IngPreguntascontroller_inprimary= stage1;
-        
     }
+
 }

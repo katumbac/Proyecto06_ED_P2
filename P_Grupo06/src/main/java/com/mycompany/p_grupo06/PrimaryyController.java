@@ -6,7 +6,7 @@ package com.mycompany.p_grupo06;
 
 import Arboles.BinaryTree;
 import com.mycompany.p_grupo06.App;
-import com.mycompany.p_grupo06.IngPreguntasController;
+
 import data.DataManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,8 +28,10 @@ import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 /**
  * FXML Controller class
  *
@@ -52,36 +54,51 @@ public class PrimaryyController implements Initializable {
     private TextField preg;
     @FXML
     private Label lblrespuesta;
+    @FXML
+    private Label lblTurespuesta;
+    @FXML
+    private HBox HBoxP;
+    @FXML
+    private Button btnOk;
+    @FXML
+    private Button btninfo;
+    @FXML
+    private TextArea prueba;
     
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        EventHandler<ActionEvent> eventSI = (ActionEvent e) -> {
+        //Carga del archivo de los animales con sus caracteristicas
+        DataManager dm = new DataManager(App.pathArchivoRespuestas);
+        //Inicia con btn Ok
+    } 
+    
+    private void nOpciones() throws IOException {
+        /*EventHandler<ActionEvent> eventSI = (ActionEvent e) -> {
             lblrespuesta.setText("si");
+            prueba.setText("si");
         };
         btnSi.setOnAction(eventSI);
         
         EventHandler<ActionEvent> eventNO = (ActionEvent e) -> {
             lblrespuesta.setText("no");
         };
-        btnNo.setOnAction(eventNO);
-        //Carga del archivo de los animales con sus caracteristicas
-        DataManager dm = new DataManager(App.pathArchivoRespuestas);
-        nPreguntas.setText("3");
-        putQuestionNodes();    
-        
-       
-        
-    } 
-    
-    public void llenarNPreguntas(String s){
-        //nPreguntas.setText(s);   
-        preg.setText(s);
+        btnNo.setOnAction(eventNO); */  
     }
     
+    @FXML
+    private void bInfo() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information Dialog");
+        alert.setHeaderText("Ingrese número de preguntas");
+        alert.setContentText("Recuerde que el máximo de preguntas es de 20");
+        alert.showAndWait();      
+    }
+        
     //Agregado 06082022
-    public void putQuestionNodes(){
+    public void putQuestionNodes() throws IOException{
 
         //Cantidad de preguntas
         int n = 0;
@@ -158,20 +175,18 @@ public class PrimaryyController implements Initializable {
         String num = nPreguntas.getText();
         int x = Integer.parseInt(num);
         Display(bt,x);
-        //menu(bt,bt.countLevelsRecursive()-1);//por las respuestas no son preguntas
-        
+      
     }
     
-    
-    public void Display(BinaryTree<String> bt, int N){
+    public void Display(BinaryTree<String> bt, int N) throws IOException{
         System.out.println("Ingrese si o no");
         Stack<BinaryTree<String>> pila= new Stack<>();
         System.out.println(bt.getRootContent());
         lblPreguntas.setText(bt.getRootContent());
- 
-        String text = lblrespuesta.getText();
-
-        System.out.println(text);
+        nOpciones();
+        String text = prueba.getText();
+        
+        System.out.println("Resp" + text);
         /*if(text.equalsIgnoreCase("si")){
             pila.push(bt.getLeft());
         }
@@ -265,13 +280,50 @@ public class PrimaryyController implements Initializable {
 
     }
 
-    
-
 
     @FXML
     private void Salir(MouseEvent event) {
         Platform.exit();
     }
+
+    @FXML
+    private void btnOk(MouseEvent event) throws IOException {
+        
+        String numP = preg.getText();
+        //numP=numP.replaceAll(" ", "");
+        System.out.println(numP.length());
+        int n = Integer.parseInt(numP);
+        if(numP.length()!=0){    
+            if(n>0 && n<=20){
+                System.out.println("Ingreso correcto de cantidad de numeros");
+                nPreguntas.setText(numP);
+                preg.clear();
+                preg.setVisible(false);
+                HBoxP.setVisible(true);
+                btnOk.setVisible(false);
+                btninfo.setVisible(false);
+
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Ingrese número de preguntas correcto");
+                alert.setContentText("Recuerde que el máximo de preguntas es de 20");
+                alert.showAndWait();  
+                preg.clear();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Ingrese número de preguntas correcto");
+            alert.setContentText("Recuerde que el máximo de preguntas es de 20");
+            alert.showAndWait();  
+            
+        }
+        putQuestionNodes();  
+    }
+
     
+
+
 
 }
