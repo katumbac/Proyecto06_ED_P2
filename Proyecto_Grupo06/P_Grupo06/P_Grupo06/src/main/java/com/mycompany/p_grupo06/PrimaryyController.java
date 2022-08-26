@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
 package com.mycompany.p_grupo06;
 
 import Arboles.BinaryTree;
@@ -8,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +21,8 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Stack;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,6 +31,7 @@ import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -58,92 +66,79 @@ public class PrimaryyController implements Initializable {
     private Button btnOk;
     @FXML
     private Button btninfo;
-    
-    private BinaryTree<String> arbol;
     @FXML
-    private HBox opciones;
+    private TextArea prueba;
+    private ListView panelAnimals;
+    private LinkedList<String> animales;
+    private int nPreg;
+    private int nPregfinal;
+    private BinaryTree<String> arbol;
     
-    private Stack<BinaryTree<String>> pila= new Stack<>();
-    
-    private int N;
     public PrimaryyController() {
         this.arbol = new BinaryTree<>();
-        
+        this.animales = new LinkedList<>();
+        this.panelAnimals= new ListView<>();
     }
+
+    
+    
+
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
         //Carga del archivo de los animales con sus caracteristicas
         DataManager dm = new DataManager(App.pathArchivoRespuestas);
         arbol = putQuestionNodes();
         lblPreguntas.setText(arbol.getRootContent());
-
-    } 
-    /*
-    System.out.println(bt.getRootContent());
-        lblPreguntas.setText(bt.getRootContent());
-        nOpciones();
-        String text = prueba.getText();
+       
         
-        System.out.println("Resp" + text);
-        /*if(text.equalsIgnoreCase("si")){
-            pila.push(bt.getLeft());
+        
+        try {
+            nOpciones();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        if(text.equalsIgnoreCase("no")){
-            pila.push(bt.getRight());
-        }
-        if(N==1){
-            pila.pop().showLeaf();
-        }
-        while(N>1){
-            BinaryTree<String> arbol=pila.pop();
-            
-            System.out.println(arbol.getRootContent());
-            lblPreguntas.setText(arbol.getRootContent());
-            String text1 = lblrespuesta.getText();
-            System.out.println("btn: "+ text1);
-            if(arbol.isLeaf()){
-                System.out.println("Estabas pensando en un: "+arbol.getRootContent());
-           
-            }
-            if(N==1 && !arbol.isLeaf()){
-                System.out.println("hojas");
-                arbol.showLeaf();
+    } 
+    
+    private void nOpciones() throws IOException {
+        EventHandler<ActionEvent> eventSI = (ActionEvent e) -> {
+            nPregfinal+=1;
+            lblrespuesta.setText("si");
+            if(nPreg==1){
+              //mostaranimal(arbol.getLeft());
+              showLeafList(arbol.getLeft());
+            }else if(!arbol.isEmpty()){
                 
+                Display("si");}
+            
+        };
+        btnSi.setOnAction(eventSI);
+        
+        EventHandler<ActionEvent> eventNO = (ActionEvent e) -> {
+             nPregfinal+=1;
+            lblrespuesta.setText("no");
+            if(nPreg==1){
+                //mostaranimal(arbol.getRight());
+                showLeafList(arbol.getRight());
+            }else if(!arbol.isEmpty()){
                 
-            }else if (text1.equalsIgnoreCase("SI") && arbol.getLeft()!=null){
-                pila.push(arbol.getLeft());
-            
-            }else if(text1.equalsIgnoreCase("NO") && arbol.getRight()!=null){
-                pila.push(arbol.getRight());
-            }else{
-                System.out.println("no es posible Determinar");
-                System.exit(0);
-            }
-            --N;
-        }
-        if(pila.size()==1){
-            System.out.print("Posiblemente estes pensando en un: ");
-            //pila.pop().showLeaf(); 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Respuesta");
-            alert.setHeaderText("Posiblemente estes pensando en un: ");
-            alert.setContentText(pila.pop().showLeaf());
-            
-        }*/
-   
+                Display("no");}
+        };
+        btnNo.setOnAction(eventNO); 
+    }
+    
     @FXML
     private void bInfo() throws IOException {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText("Ingrese número de preguntas");
-        alert.setContentText("Recuerde que el máximo de preguntas es de "+ arbol.countLevelsRecursive());
+        alert.setContentText("Recuerde que el máximo de preguntas es de 20");
         alert.showAndWait();      
     }
         
     //Agregado 06082022
-    public BinaryTree<String> putQuestionNodes(){
+        public BinaryTree<String> putQuestionNodes(){
         //Cantidad de preguntas
         int n = 0;
         int contadorNodo = 0;
@@ -223,42 +218,77 @@ public class PrimaryyController implements Initializable {
         
     }
     
-    /*public void Display(String s, int N){ 
-        if(N==1){
+    public void Display(String s){
+      
+            
+        
+        if(arbol ==null){
             btnSi.setVisible(false);
             btnNo.setVisible(false);
-            lblPreguntas.setText("Tu animal es:");
-            lblTurespuesta.setVisible(false);
-            String r = pila.pop().showLeaf();
-            lblrespuesta.setText("hoja");
         }
+        if(s.equalsIgnoreCase("si")){
+            
+            
+                
+            if(arbol.isLeaf()){
+                lblPreguntas.setText("Quizas estas Pesando en un "+arbol.getRootContent());
+                btnSi.setVisible(false);
+                btnNo.setVisible(false);
+            }
+            if(nPreg>nPregfinal){
+                arbol = arbol.getLeft();
+                lblPreguntas.setText(arbol.getRootContent());
+            }else
+                //mostaranimal(arbol);
+               showLeafList(arbol);
         
+        if(s.equalsIgnoreCase("no")){
+            if(arbol.isLeaf()){
+                lblPreguntas.setText("Quizas estas Pesando en un "+arbol.getRootContent());
+                btnSi.setVisible(false);
+                btnNo.setVisible(false);
+            } 
+            if(nPreg>nPregfinal){
+                arbol = arbol.getRight();
+                lblPreguntas.setText(arbol.getRootContent());
         
+            }else
+                //mostaranimal(arbol);
+                showLeafList(arbol);
+            
+        }
+        /*if(text.equalsIgnoreCase("si")){
+            pila.push(bt.getLeft());
+        }
+        if(text.equalsIgnoreCase("no")){
+            pila.push(bt.getRight());
+        }
+        if(N==1){
+            pila.pop().showLeaf();
+        }
         while(N>1){
-            BinaryTree<String> arb=pila.pop();     
-            System.out.println(arb.getRootContent());
-            lblPreguntas.setText(arb.getRootContent());
+            BinaryTree<String> arbol=pila.pop();
+            
+            System.out.println(arbol.getRootContent());
+            lblPreguntas.setText(arbol.getRootContent());
             String text1 = lblrespuesta.getText();
-            if(arb.isLeaf()){
-                System.out.println("Estabas pensando en un: "+arb.getRootContent());
-                lblrespuesta.setText("Estabas pensando en un: "+arb.getRootContent());
+            System.out.println("btn: "+ text1);
+            if(arbol.isLeaf()){
+                System.out.println("Estabas pensando en un: "+arbol.getRootContent());
            
             }
-            if(N==1 && !arb.isLeaf()){
+            if(N==1 && !arbol.isLeaf()){
                 System.out.println("hojas");
-                lblrespuesta.setText(arb.showLeaf());
-                
-                arb.showLeaf();
+                arbol.showLeaf();
                 
                 
-            }else if (text1.equalsIgnoreCase("SI") && arb.getLeft()!=null){
-                pila.push(arb.getLeft());
+            }else if (text1.equalsIgnoreCase("SI") && arbol.getLeft()!=null){
+                pila.push(arbol.getLeft());
             
-            }else if(text1.equalsIgnoreCase("NO") && arb.getRight()!=null){
-                pila.push(arb.getRight());
+            }else if(text1.equalsIgnoreCase("NO") && arbol.getRight()!=null){
+                pila.push(arbol.getRight());
             }else{
                 System.out.println("no es posible Determinar");
-                lblrespuesta.setText("no es posible Determinar");
                 System.exit(0);
             }
             --N;
@@ -271,37 +301,11 @@ public class PrimaryyController implements Initializable {
             alert.setHeaderText("Posiblemente estes pensando en un: ");
             alert.setContentText(pila.pop().showLeaf());
             
-        }
-    }*/
-    
-    
-    public void Display(String s, int N){  
-        String numP = preg.getText();
-        int n = Integer.parseInt(numP);
-        if(n != arbol.countLevelsRecursive()){
-            if(s.equalsIgnoreCase("si")){
-                System.out.println(arbol.getRootContent());
-                lblPreguntas.setText(arbol.getRootContent());  
-                pila.push(arbol.getLeft());
-                arbol = arbol.getLeft();      
-                System.out.println("si");
-
-            }else if(s.equalsIgnoreCase("no")){
-                System.out.println(arbol.getRootContent());
-                pila.push(arbol.getLeft());
-                arbol = arbol.getRight();
-                lblPreguntas.setText(arbol.getRootContent());     
-                System.out.println("no");
-            } 
-        }else{
-            System.out.println("n");
-        
-        }
-            
-           
+        }*/
+              
     }
           
-    
+    }
     private BinaryTree<String> respuestaPorNivel(BinaryTree<String> bt){    
   
         //mapa donde estan como clave los animales y como valor su respuestas a caracterisiticas en preguntas
@@ -319,22 +323,25 @@ public class PrimaryyController implements Initializable {
                 BinaryTree<String> temp = pila.pop();
                 
                 if(values.get(i).equalsIgnoreCase("no") && temp.getRight() != null){
+                    temp.getRight().getRoot().setIsVisited(true);
                     pila.push(temp.getRight());
                 }
                 if(values.get(i).equalsIgnoreCase("si") && temp.getLeft() != null){
+                    temp.getLeft().getRoot().setIsVisited(true);
                     pila.push(temp.getLeft());
                 }
                 if(values.get(i).equalsIgnoreCase("no") && (temp.getRight() == null)){
-
+                    temp.getRoot().setIsVisited(true);
                     temp.setRight(new BinaryTree<>(entry.getKey()));
-
+                    temp.getRight().getRoot().setIsVisited(true);
                     pila.push(bt);
                 }
 
                 if(values.get(i).equalsIgnoreCase("si") && (temp.getLeft() == null)){
                     
-
+                    temp.getRoot().setIsVisited(true);
                     temp.setLeft(new BinaryTree<>(entry.getKey()));  
+                    temp.getLeft().getRoot().setIsVisited(true);
                     pila.push(bt);
                     
                 }
@@ -356,10 +363,10 @@ public class PrimaryyController implements Initializable {
     private void btnOk(MouseEvent event) throws IOException {
         
         String numP = preg.getText();
+        
         //numP=numP.replaceAll(" ", "");
         System.out.println(numP.length());
-        N=Integer.parseInt(numP);
-        int n = N;
+        int n = Integer.parseInt(numP);
         if(numP!=""){    
             if(n>0 && n<arbol.countLevelsRecursive()){
                 System.out.println("Ingreso correcto de cantidad de numeros");
@@ -386,22 +393,50 @@ public class PrimaryyController implements Initializable {
             alert.showAndWait();  
             
         }
+        nPreg=Integer.valueOf(numP);
+        nPregfinal=0;
         putQuestionNodes();  
     }
 
-    @FXML
-    private void nOptionSi(){
-        lblrespuesta.setText("si");
-        N++;
-        Display("si",N);
-        
+    private void showLeafList(BinaryTree<String> bt){  
+        Stack<BinaryTree<String>> pila = new Stack<>();
+        ArrayList<String> lista = new ArrayList<>();
+        pila.push(bt);
+        while(!pila.isEmpty()){
+            BinaryTree<String> arbol = pila.pop();
+            if(arbol.getRoot().getIsVisited() && arbol.getLeft() != null){
+                pila.push(arbol.getLeft());
+            }
+            if(arbol.getRoot().getIsVisited() && arbol.getRight() != null){
+                pila.push(arbol.getRight());
+            }
+            if(arbol.isLeaf() && arbol.getRoot().getIsVisited()){
+                lista.add(arbol.getRootContent());
+            }
+        }
+        mostaranimal(lista);
+        System.out.println("La lista es: " + lista);
     }
+    
+private void mostaranimal(ArrayList<String> abt){
+    
+    for(String s : abt){
+        ObservableList<String> names = FXCollections.observableArrayList(s);
+        ListView<String> listView = new ListView<String>(names);
+        nPreguntas.setText("Quizas estabas pensando en estos animals?");
+        HBoxP.getChildren().clear();
+        HBoxP.getChildren().add(listView);
+    }
+        /* 
+        ObservableList<String> names = FXCollections.observableArrayList(abt);
+        ListView<String> listView = new ListView<String>(names);
+        nPreguntas.setText("Quizas estabas pensando en estos animals?");
+        HBoxP.getChildren().clear();
+        HBoxP.getChildren().add(listView);
+        */
+}
+    
 
-    @FXML
-    private void nOptionNo() {
-        N++;
-        lblrespuesta.setText("no");
-        Display("no",N);
-    }
+
 
 }
